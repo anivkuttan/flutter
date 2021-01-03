@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidgetClass(),
+    );
+  }
+}
+
+class MyWidgetClass extends StatefulWidget {
+  @override
+  _MyWidgetClassState createState() => _MyWidgetClassState();
+}
+
+class _MyWidgetClassState extends State<MyWidgetClass> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          Button(),
+        ],
+      ),
+    );
+  }
+}
+
+class Button extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => RaisedButton(
+        onPressed: () {
+          final SnackBar _snackBar = SnackBar(
+            content: Text("jwks"),
+            duration: Duration(seconds: 6),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+        }, //onpressed
+        child: Text("Button"), //texzt
+      );
+}
