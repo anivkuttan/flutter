@@ -21,7 +21,7 @@ class _MyWidgetClassState extends State<MyWidgetClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Button(),
         ],
@@ -35,9 +35,27 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) => RaisedButton(
         onPressed: () {
           final SnackBar _snackBar = SnackBar(
-            content: Text("jwks"),
-            duration: Duration(seconds: 6),
-          );
+            content: Container(
+              height: 50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Icon(Icons.people), //icon
+                  Text("Hello this is Row"), //text
+                ],
+              ), //child
+              alignment: Alignment.center,
+            ), //contend
+            behavior: SnackBarBehavior.floating,
+            elevation: 11,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            duration: Duration(seconds: 6), backgroundColor: Colors.blue,
+            action: SnackBarAction(
+              label: "Ok", textColor: Colors.yellow,
+              onPressed: () {}, //onpressed
+            ), //action
+          ); //snackbar
           ScaffoldMessenger.of(context).showSnackBar(_snackBar);
         }, //onpressed
         child: Text("Button"), //texzt
