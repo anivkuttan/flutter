@@ -1,82 +1,102 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return MaterialApp(
-    home:MyWidget());
+      title: "Page Change app",
+      home: HomePage(), //home page
+    );
   }
 }
 
-class MyWidget extends StatefulWidget {
+/*--------------- Home page ------------------*/
+
+class HomePage extends StatefulWidget {
   @override
-  _MyWidgetState createState() => _MyWidgetState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Page Switching"),
-        centerTitle: true,
+        title: Text('Home Page'),
       ), //appbar
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "Home Page",
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ), //text
+            Spacer(flex:1),
+
             RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SecondPage()));
-              },
-              child: Text("Go to 2nd Page"), //child
-              color: Colors.red,
-            ), //button
-          ], //widget
+                child: Text("2 nd page"),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SecondPage()));
+                },
+                color: Colors.blue), //raisedbutton
+            Spacer(flex:1),
+            RaisedButton(
+                child: Text("3rd page "), onPressed: () {Navigator.push(context,MaterialPageRoute(builder:(context)=>LastPage()));}, color: Colors.blue),
+            Spacer(flex:8),
+          ],
         ), //column
       ), //center
-    ); //scaffold
-      
+    );
   }
 }
+
+/*----------- Second Page -----------------*/
 
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Second Page"), //text
+        title: Text('Second Page'),
       ), //appbar
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
+        child: Column(children: <Widget>[
           Text(
-            "SecondPage",
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ), //textstyle
-          ), //text
+            'Second Page',
+            style: TextStyle(fontSize: 40),
+          ),
           RaisedButton(
-            child: Text("Back"),
             onPressed: () {
-              Navigator.pop(context);
-            },
+
+            Navigator.pop(context);},
+            child: Text(' Back to Home page'),
+            color: Colors.yellow,
           ), //button
-        ],
-      ) //column
-          ), //center
+        ]), //column
+      ), //center
+    );
+  }
+}
+
+/*----------- Last Page -----------------*/
+
+class LastPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Second Page'),
+      ), //appbar
+      body: Center(
+        child: Column(children: <Widget>[
+          RaisedButton(
+            onPressed: () {Navigator.pop(context);},
+            child: Text('Last page'),
+          ), //button
+        ]), //column
+      ), //center
     );
   }
 }
