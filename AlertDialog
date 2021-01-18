@@ -26,7 +26,14 @@ class _MyWidgetState extends State<MyWidget> {
         builder: (context) {
           return AlertDialog(
             title: Text("Hello world"),
+            titlePadding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            titleTextStyle: TextStyle(
+                color: Colors.orange,
+                fontWeight: FontWeight.w500,
+                fontSize: 34),
             content: Text("This is content page"),
+            contentPadding: EdgeInsets.fromLTRB(20, 20, 50, 30),
+            contentTextStyle: TextStyle(fontSize: 20, color: Colors.purple),
             actions: <Widget>[
               TextButton(
                 child: Text('Ok'),
@@ -38,37 +45,71 @@ class _MyWidgetState extends State<MyWidget> {
                   },
                   child: Text('Cancel')),
             ],
+            buttonPadding: EdgeInsets.all(20),
+            backgroundColor: Colors.grey[200],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+            ),
           );
         });
   }
 
+  Future messageBox2(BuildContext context) async {
+    return showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return Dialog(
+          child: Column(
+            children: [
+              Container(height: 220, color: Colors.red),
+              Container(color: Colors.blue, height: 220)
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          messageBox(context);
-          // return showDialog(
-          //   context: context,
-          //   barrierDismissible: false,
-          //   builder: (context) => AlertDialog(
-          //     title: Text("Hello world sample dialog page"),
-          //     content: Text("hello this is content"),
-          //     actions: <Widget>[
-          //       TextButton(
-          //           child: Text("Ok"),
-          //           onPressed: () {
-          //             Navigator.of(context).pop();
-          //           }),
-          //     ],
-          //   ),
-          // );
-        },
-        child: Text(
-          "Click",
-          style: TextStyle(color: Colors.white),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            messageBox(context);
+            // return showDialog(
+            //   context: context,
+            //   barrierDismissible: false,
+            //   builder: (context) => AlertDialog(
+            //     title: Text("Hello world sample dialog page"),
+            //     content: Text("hello this is content"),
+            //     actions: <Widget>[
+            //       TextButton(
+            //           child: Text("Ok"),
+            //           onPressed: () {
+            //             Navigator.of(context).pop();
+            //           }),
+            //     ],
+            //   ),
+            // );
+          },
+          child: Text("Basic"),
         ),
-      ),
+        SizedBox(
+          height: 20,
+        ),
+        ElevatedButton(
+          child: Text('Content'),
+          onPressed: () {
+            messageBox2(context);
+          },
+        ),
+      ],
     );
   }
 }
+
