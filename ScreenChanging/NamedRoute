@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+      'secondPage': (context) => SecondPage(),
+      },
+    );
+  }
+}
+
+//------------HomePage------------------//
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home Page App Bar"),
+      ), //appbar
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "secondPage");
+              },
+              child: Text("Press Me"),
+            ), //button 1
+          ], //widget
+        ), //column
+      ), //center
+    );
+  }
+}
+
+//-------------SecondPage-----------------//
+
+class SecondPage extends StatefulWidget {
+  @override
+  _SecondPageState createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("SecondPage"),
+        ), //appbar
+        body: Center(
+          child: Container(
+            color: Colors.orange,
+            height: double.infinity,
+            width: double.infinity,
+            alignment:Alignment.center, 
+            child: Text(
+              'Second Page', style: TextStyle(fontSize: 45), //textstyle
+            ), //text
+          ), //container
+        ) //center
+        );
+  }
+}
+
+//-------------ThirdPage-----------------//
+
+class ThirdPage extends StatefulWidget {
+  @override
+  _ThirdPageState createState() => _ThirdPageState();
+}
+
+class _ThirdPageState extends State<ThirdPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Third page AppBar'),
+      ), //appbar
+    );
+  }
+}
