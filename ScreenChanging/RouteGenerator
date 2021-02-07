@@ -1,0 +1,172 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: HomePage.routeName,
+      onGenerateRoute: RouteGenerator.genarateRoute,
+      // routes: {
+      //   HomePage.routeName: (context) => HomePage(),
+      //   SecondPage.routeName: (context) => SecondPage(),
+      //   ThirdPage.routeName: (context) => ThirdPage(),
+      // },
+    );
+  }
+}
+
+//---------------RouteGemerator----------------//
+
+class RouteGenerator {
+  static Route<dynamic> genarateRoute(RouteSettings settings) {
+    final args = settings.arguments;
+
+    switch (settings.name) {
+      case HomePage.routeName:
+        return MaterialPageRoute(builder: (context) => HomePage());
+      case SecondPage.routeName:
+        return MaterialPageRoute(builder: (context) => SecondPage());
+      case ThirdPage.routeName:
+        return MaterialPageRoute(builder: (context) => ThirdPage());
+      default:
+        return _errorRoute();
+    }
+  }
+
+//---------------Error Page Route----------------//
+  static Route<dynamic> _errorRoute() {
+    return MaterialPageRoute(builder: (context) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text("Error"),
+        ),
+        body: Center(
+          child: Text(
+            'ERROR',
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.red,
+            ),
+          ),
+        ),
+      );
+    });
+  }
+}
+
+//---------------HomePage----------------//
+
+class HomePage extends StatefulWidget {
+  static const String routeName = '/HomePage';
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home Page App Bar'),
+      ), //appbar
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              'Home Page Screen',
+              style: TextStyle(fontSize: 38),
+            ), //text
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, SecondPage.routeName);
+              },
+              child: Text('Page 2'),
+            ), //button
+          ],
+        ),
+      ), //center
+    ); //scffold
+  }
+}
+
+//---------------SecondPage----------------//
+
+class SecondPage extends StatefulWidget {
+  static const String routeName = '/SecondPage';
+  @override
+  _SecondPageState createState() => _SecondPageState();
+}
+
+class _SecondPageState extends State<SecondPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: Text('Second Page App Bar'),
+      ), //appbar
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              '2 nd Page Screen',
+              style: TextStyle(fontSize: 38, color: Colors.green),
+            ), //text
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, ThirdPage.routeName);
+              },
+              child: Text('Page 3'),
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.orange, onPrimary: Colors.black),
+            ), //button
+          ],
+        ),
+      ), //center
+    ); //scffold
+  }
+}
+
+//---------------ThirdPage----------------//
+
+class ThirdPage extends StatefulWidget {
+  static const String routeName = '/ThirdPage';
+  @override
+  _ThirdPageState createState() => _ThirdPageState();
+}
+
+class _ThirdPageState extends State<ThirdPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purple,
+        title: Text('Third Page App Bar'),
+      ), //appbar
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              '3 nd Page Screen',
+              style: TextStyle(fontSize: 38, color: Colors.purple),
+            ), //text
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Page 1'),
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.purple, onPrimary: Colors.black),
+            ), //button
+          ],
+        ),
+      ), //center
+    ); //scffold
+  }
+}
