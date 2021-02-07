@@ -6,18 +6,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      initialRoute: HomePage.routeName,
       routes: {
-        '/': (context) => HomePage(),
-      'secondPage': (context) => SecondPage(),
+        HomePage.routeName: (context) => HomePage(),
+        SecondPage.routeName: (context) => SecondPage(),
       },
     );
   }
 }
 
-//------------HomePage------------------//
+//---------------HomePage----------------//
 
 class HomePage extends StatefulWidget {
+  static const String routeName = '/HomePage';
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -27,28 +28,33 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page App Bar"),
+        title: Text('Home Page App Bar'),
       ), //appbar
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              'Home Page Screen',
+              style: TextStyle(fontSize: 38),
+            ), //text
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "secondPage");
+                Navigator.pushNamed(context, SecondPage.routeName);
               },
-              child: Text("Press Me"),
-            ), //button 1
-          ], //widget
-        ), //column
+              child: Text('Page 2'),
+            ), //button
+          ],
+        ),
       ), //center
-    );
+    ); //scffold
   }
 }
 
-//-------------SecondPage-----------------//
+//---------------SecondPage----------------//
 
 class SecondPage extends StatefulWidget {
+  static const String routeName = '/SecondPage';
   @override
   _SecondPageState createState() => _SecondPageState();
 }
@@ -57,38 +63,29 @@ class _SecondPageState extends State<SecondPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("SecondPage"),
-        ), //appbar
-        body: Center(
-          child: Container(
-            color: Colors.orange,
-            height: double.infinity,
-            width: double.infinity,
-            alignment:Alignment.center, 
-            child: Text(
-              'Second Page', style: TextStyle(fontSize: 45), //textstyle
-            ), //text
-          ), //container
-        ) //center
-        );
-  }
-}
-
-//-------------ThirdPage-----------------//
-
-class ThirdPage extends StatefulWidget {
-  @override
-  _ThirdPageState createState() => _ThirdPageState();
-}
-
-class _ThirdPageState extends State<ThirdPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
       appBar: AppBar(
-        title: Text('Third page AppBar'),
+        backgroundColor: Colors.orange,
+        title: Text('Second Page App Bar'),
       ), //appbar
-    );
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
+              '2 nd Page Screen',
+              style: TextStyle(fontSize: 38, color: Colors.green),
+            ), //text
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Page 1'),
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.orange, onPrimary: Colors.black),
+            ), //button
+          ],
+        ),
+      ), //center
+    ); //scffold
   }
 }
