@@ -19,11 +19,27 @@ class MyWidget extends StatefulWidget {
 
 class _MyWidgetState extends State<MyWidget> {
   final String text = "Please Click";
-  bottomSheet(BuildContext context) {
+  _bottomSheet(BuildContext context) {
     return showModalBottomSheet(
         context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
         builder: (context) {
-          return Container(height: MediaQuery.of(context).size.height * 0.4);
+          return Padding(
+              padding: EdgeInsets.only(top: 30, left: 30, right: 30),
+              child: Column(children: [
+                TextField(
+                  decoration: InputDecoration(hintText: "Enter Email", border:OutlineInputBorder(borderRadius:BorderRadius. circular(20)  ), //border
+                                             ), //deco
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(onPressed: () {}, child: Text('Sumit')),
+              ]) //column
+              ); //padding
         });
   }
 
@@ -39,7 +55,7 @@ class _MyWidgetState extends State<MyWidget> {
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
           ElevatedButton(
             onPressed: () {
-              bottomSheet(context);
+              _bottomSheet(context);
             },
             child: Text("Open Bottom Sheet"),
           ),
