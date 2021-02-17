@@ -18,7 +18,8 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  final String text = "Please Click";
+  String _text = "Please Click";
+  TextEditingController textController = TextEditingController() ;
   _bottomSheet(BuildContext context) {
     return showModalBottomSheet(
         context: context,
@@ -33,11 +34,23 @@ class _MyWidgetState extends State<MyWidget> {
               padding: EdgeInsets.only(top: 30, left: 30, right: 30),
               child: Column(children: [
                 TextField(
-                  decoration: InputDecoration(hintText: "Enter Email", border:OutlineInputBorder(borderRadius:BorderRadius. circular(20)  ), //border
-                                             ), //deco
+                  controller :textController, 
+                 
+                  
+                  decoration: InputDecoration(
+                    hintText: "Enter Email",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20)), //border
+                  ), //deco
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(onPressed: () {}, child: Text('Sumit')),
+                ElevatedButton(onPressed: () {
+
+                setState(() {
+
+                _text = textController.text;} ) ;
+                  // to close the sheet
+                Navigator. pop(context) ;}, child: Text('Sumit')),
               ]) //column
               ); //padding
         });
@@ -51,7 +64,7 @@ class _MyWidgetState extends State<MyWidget> {
       ), //appba
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(text,
+          Text(_text,
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
           ElevatedButton(
             onPressed: () {
