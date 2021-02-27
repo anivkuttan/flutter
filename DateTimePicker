@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyWidget(),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  Future datePicker(BuildContext context) async{
+    final date = showDatePicker(
+    context :context, firstDate:DateTime(2010),
+    lastDate:DateTime(2025),initialDate:DateTime.now()) ;
+return date;
+  } 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("AppBar"),
+      ), //appba
+      body: Center(
+        child: Column(children: [
+          ElevatedButton(
+            child: Text('Date Picker'),
+            onPressed: () {datePicker(context); },
+          ), //button
+        ]), //column
+      ), //center
+    );
+  }
+}
