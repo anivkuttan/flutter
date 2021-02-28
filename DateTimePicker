@@ -17,23 +17,36 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  DateTime selectedDate;
+  DateTime pickedDate;
+  TimeOfDay pickedTime;
+  @override
+  void initState() {
+    super.initState();
+    pickedDate = DateTime.now();
+    pickedTime = TimeOfDay.now();
+  }
+
   Future datePicker(BuildContext context) async {
     final date = await showDatePicker(
         context: context,
-        firstDate: DateTime(2010),
+        firstDate: DateTime(DateTime.now().year - 10),
         lastDate: DateTime(2025),
         initialDate: DateTime.now());
     if (date != null) {
       setState(() {
-        selectedDate = date;
+        pickedDate = date;
       });
     }
   }
 
-  Future timePicker(BuildContext context) {
-    final time = showTimePicker(context: context, initialTime: TimeOfDay.now());
-    return time;
+  Future timePicker(BuildContext context) async {
+    final time =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (time != null) {
+      setState(() {
+        pickedTime = time;
+      });
+    }
   }
 
   @override
@@ -55,7 +68,9 @@ class _MyWidgetState extends State<MyWidget> {
               onPressed: () {
                 timePicker(context);
               }), //vutton
-          Text('Date : ${this.selectedDate} '),
+          Text('${pickedDate.day}:${pickedDate.month}:${pickedDate.year} ',
+              style: TextStyle(fontSize: 30)),
+          Text('${pickedTime}', style: TextStyle(fontSize: 30)),
         ]), //column
       ), //center
     );
