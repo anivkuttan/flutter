@@ -17,12 +17,25 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  Future datePicker(BuildContext context) async{
-    final date = showDatePicker(
-    context :context, firstDate:DateTime(2010),
-    lastDate:DateTime(2025),initialDate:DateTime.now()) ;
-return date;
-  } 
+  DateTime selectedDate;
+  Future datePicker(BuildContext context) async {
+    final date = await showDatePicker(
+        context: context,
+        firstDate: DateTime(2010),
+        lastDate: DateTime(2025),
+        initialDate: DateTime.now());
+    if (date != null) {
+      setState(() {
+        selectedDate = date;
+      });
+    }
+  }
+
+  Future timePicker(BuildContext context) {
+    final time = showTimePicker(context: context, initialTime: TimeOfDay.now());
+    return time;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +46,16 @@ return date;
         child: Column(children: [
           ElevatedButton(
             child: Text('Date Picker'),
-            onPressed: () {datePicker(context); },
+            onPressed: () {
+              datePicker(context);
+            },
           ), //button
+          ElevatedButton(
+              child: Text('time'),
+              onPressed: () {
+                timePicker(context);
+              }), //vutton
+          Text('Date : ${this.selectedDate} '),
         ]), //column
       ), //center
     );
