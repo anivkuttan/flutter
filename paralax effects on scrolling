@@ -1,0 +1,130 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key}) : super(key: key);
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  late PageController controller;
+  dynamic alignmentOffset = 0.0;
+  @override
+  void initState() {
+    super.initState();
+    controller = PageController(viewportFraction: 0.8);
+    controller.addListener(() {
+      setState(() {
+        alignmentOffset = controller.page;
+        // print('ControllerPage = ${controller.page}');
+      });
+    });
+  }
+
+  double offset = 0;
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    return Scaffold(
+      body: Center(
+        child: Stack(
+          children: [
+            Positioned(
+              top: -offset / 2,
+              left: 0,
+              child: Container(
+                //to make container height at specific height
+                height: screenSize.height / 3,
+                width: screenSize.width,
+                color: Colors.red,
+                child: Image.asset('assets/images/beer.jpg', fit: BoxFit.cover),
+              ),
+            ),
+            Positioned(
+              // make this container below the uperContainer
+              // so start with uper container height
+              top: screenSize.height / 3,
+              left: 0,
+              //make Container height upto bottom so screen Height - uperContainer height
+              height: screenSize.height - (screenSize.height / 3),
+              child: Container(
+                width: screenSize.width,
+                color: Colors.white10,
+                child: PageView(
+                  controller: controller,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      height: 200,
+                      width: 150,
+                      color: Colors.green,
+                      child: Image.asset(
+                        'assets/images/beer.jpg',
+                        fit: BoxFit.cover,
+                        // set alignmnt x = current page, make nagative to paralax
+                        alignment: Alignment(-alignmentOffset, 0),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      height: 200,
+                      width: 150,
+                      color: Colors.green,
+                      child: Image.asset(
+                        'assets/images/tree.jpg',
+                        fit: BoxFit.cover,
+                        // make alignment offset - page Index to align image
+                        alignment: Alignment(-(alignmentOffset - 1), 1),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      height: 200,
+                      width: 150,
+                      color: Colors.grey,
+                      child: Image.asset(
+                        'assets/images/man.webp',
+                        fit: BoxFit.cover,
+                        alignment: Alignment(-(alignmentOffset - 2), 0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
