@@ -1,10 +1,26 @@
-making app icon 
+-------------------making app icon ---------------------
 
 Select a png image or create a image 
 go to the appico.co website paste the image generate the file 
 that containes hdpi (5)files various Sizes images 
 copy tha files and paste tho project/android/app/src/main/res
 
-changing app name
+--------------------changing app name-------------
 
 go to anroid manifest .xml file change android:lable fileld to user app name
+
+
+-------------------create splash screen--------------------
+
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Modify this file to customize your launch splash screen -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/black" />
+
+    <!-- You can insert your own image assets here -->
+    <!-- <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/launch_image" />
+    </item> -->
+</layer-list>
