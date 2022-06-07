@@ -24,3 +24,6 @@ go to anroid manifest .xml file change android:lable fileld to user app name
             android:src="@mipmap/launch_image" />
     </item> -->
 </layer-list>
+
+add image to all resolutions 
+and also edit androidManifest file
