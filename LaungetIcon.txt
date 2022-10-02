@@ -27,3 +27,26 @@ go to anroid manifest .xml file change android:lable fileld to user app name
 
 add image to all resolutions 
 and also edit androidManifest file
+
+
+------------or---------
+add NativeSplashScreen package to yaml file
+ on package propertice  
+    add asset image 
+    add color 
+    
+  then on terminal run the below comment
+  flutter pub run flutter_native_splash:create
+  
+ optional add seperat file on root folder 
+ name like flutter_native_splash.yaml
+ then add 
+ flutter_native_splash:
+  color: "#c6f723"
+  android: true
+  image: "assets/keeper_icon.png"
+  
+  
+  then run a comment
+  
+  flutter pub run flutter_native_splash:create --rootFolderName/fileName.yaml
